@@ -10,6 +10,7 @@ using IdentityModel.Client;
 using IdentityServer.IntegrationTests.Clients.Setup;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
+using Newtonsoft.Json;
 using Xunit;
 
 namespace IdentityServer.IntegrationTests.Clients
@@ -119,7 +120,7 @@ namespace IdentityServer.IntegrationTests.Clients
 
         private Dictionary<string, object> GetFields(TokenResponse response)
         {
-            return response.Json.ToObject<Dictionary<string, object>>();
+            return JsonConvert.DeserializeObject<Dictionary<string,object>>(response.Json.GetRawText());
         }
     }
 }

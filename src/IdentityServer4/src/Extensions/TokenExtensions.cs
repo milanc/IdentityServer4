@@ -33,6 +33,11 @@ namespace IdentityServer4.Extensions
         /// </exception>
         public static JwtPayload CreateJwtPayload(this Token token, ISystemClock clock, IdentityServerOptions options, ILogger logger)
         {
+
+
+            // this need to  be tweaked to use different const for json type
+
+
             var payload = new JwtPayload(
                 token.Issuer,
                 null,
