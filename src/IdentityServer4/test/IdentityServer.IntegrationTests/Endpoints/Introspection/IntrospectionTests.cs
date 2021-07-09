@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using FluentAssertions;
 using IdentityModel.Client;
@@ -180,7 +181,7 @@ namespace IdentityServer.IntegrationTests.Endpoints.Introspection
                 Token = tokenResponse.AccessToken
             });
 
-            var values = JsonConvert.DeserializeObject<Dictionary<string, object>>(introspectionResponse.Json.GetRawText());
+            var values = GetDictionary(introspectionResponse.Json);
 
             values["aud"].GetType().Name.Should().Be("String");
             values["iss"].GetType().Name.Should().Be("String");
@@ -219,7 +220,7 @@ namespace IdentityServer.IntegrationTests.Endpoints.Introspection
                 Token = tokenResponse.AccessToken
             });
 
-            var values = JsonConvert.DeserializeObject<Dictionary<string, object>>(introspectionResponse.Json.GetRawText());
+            var values = GetDictionary(introspectionResponse.Json);
 
             values["aud"].GetType().Name.Should().Be("String");
             values["iss"].GetType().Name.Should().Be("String");
@@ -258,11 +259,11 @@ namespace IdentityServer.IntegrationTests.Endpoints.Introspection
                 Token = tokenResponse.AccessToken
             });
 
-            var values = JsonConvert.DeserializeObject<Dictionary<string, object>>(introspectionResponse.Json.GetRawText());
+            var values = GetDictionary(introspectionResponse.Json);
 
             values["aud"].GetType().Name.Should().Be("JArray");
 
-            var audiences = ((JArray) values["aud"]);
+            var audiences = ((JArray)values["aud"]);
             foreach (var aud in audiences)
             {
                 aud.Type.Should().Be(JTokenType.String);
@@ -303,14 +304,14 @@ namespace IdentityServer.IntegrationTests.Endpoints.Introspection
                 Token = tokenResponse.AccessToken
             });
 
-            var values = JsonConvert.DeserializeObject<Dictionary<string, object>>(introspectionResponse.Json.GetRawText());
+            var values = GetDictionary(introspectionResponse.Json);
 
             values["aud"].GetType().Name.Should().Be("String");
-            values["iss"].GetType().Name.Should().Be("String");
-            values["nbf"].GetType().Name.Should().Be("Int64");
-            values["exp"].GetType().Name.Should().Be("Int64");
-            values["client_id"].GetType().Name.Should().Be("String");
-            values["active"].GetType().Name.Should().Be("Boolean");
+            values["iss"].GetType().Name.Should().Be("String"); 
+            values["nbf"].GetType().Name.Should().Be("Int64"); 
+            values["exp"].GetType().Name.Should().Be("Int64"); 
+            values["client_id"].GetType().Name.Should().Be("String"); 
+            values["active"].GetType().Name.Should().Be("Boolean"); 
             values["scope"].GetType().Name.Should().Be("String");
 
             var scopes = values["scope"].ToString();
@@ -409,6 +410,12 @@ namespace IdentityServer.IntegrationTests.Endpoints.Introspection
 
             introspectionResponse.IsActive.Should().Be(false);
             introspectionResponse.IsError.Should().Be(false);
+        }
+
+
+        private Dictionary<string,object> GetDictionary (JsonElement jsonElement)
+        {
+            return JsonConvert.DeserializeObject<Dictionary<string, object>>(jsonElement.GetRawText());
         }
     }
 }

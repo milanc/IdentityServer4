@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  
+
   <PropertyGroup>
     <PackageId>IdentityServer4</PackageId>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFrameworks>net6.0</TargetFrameworks>
     <Description>OpenID Connect and OAuth 2.0 Framework for ASP.NET Core</Description>
     <Authors>Brock Allen;Dominick Baier</Authors>
     <AssemblyName>IdentityServer4</AssemblyName>
@@ -30,7 +30,7 @@
     <ContinuousIntegrationBuild Condition="'$(TF_BUILD)' == 'true'">True</ContinuousIntegrationBuild>
     <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">True</ContinuousIntegrationBuild>
   </PropertyGroup>
-  
+
   <ItemGroup>
     <None Include="../../../icon.jpg" Pack="true" Visible="false" PackagePath="" />
   </ItemGroup>
@@ -41,6 +41,7 @@
 
   <ItemGroup>
     <PackageReference Include="IdentityModel" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.11.1" />
 
     <PackageReference Include="Newtonsoft.Json" />
     <PackageReference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect" />

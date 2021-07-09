@@ -54,7 +54,7 @@ namespace IdentityServer.IntegrationTests.Clients.Setup
 
                     AllowedScopes =
                     {
-                        "api1", "api2"
+                        "api1", "api2", "milanapi"
                     }
                 },
                 new Client
@@ -241,14 +241,14 @@ namespace IdentityServer.IntegrationTests.Clients.Setup
                 {
                     ClientId = "implicit",
                     AllowedGrantTypes = GrantTypes.Implicit,
-                    AllowedScopes = {"api1"},
+                    AllowedScopes = {"api1", "milan-api"},
                     RedirectUris = { "http://implicit" }
                 },
                 new Client
                 {
                     ClientId = "implicit_and_client_creds",
                     AllowedGrantTypes = GrantTypes.ImplicitAndClientCredentials,
-                    AllowedScopes = {"api1"},
+                    AllowedScopes = {"api1", "milan-api"},
                     RedirectUris = { "http://implicit_and_client_creds" }
                 }
             };

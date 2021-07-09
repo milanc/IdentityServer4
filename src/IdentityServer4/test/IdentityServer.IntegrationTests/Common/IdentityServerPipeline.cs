@@ -320,8 +320,7 @@ namespace IdentityServer.IntegrationTests.Common
             string codeChallengeMethod = null,
             object extra = null)
         {
-            var paramExtra = Parameters.FromObject(extra);
-
+            var extrParam = Parameters.FromObject(extra);
             var url = new RequestUrl(AuthorizeEndpoint).CreateAuthorizeUrl(
                 clientId: clientId,
                 responseType: responseType,
@@ -334,7 +333,7 @@ namespace IdentityServer.IntegrationTests.Common
                 responseMode: responseMode,
                 codeChallenge: codeChallenge,
                 codeChallengeMethod: codeChallengeMethod,
-                extra: paramExtra);
+                extra: extrParam);
             return url;
         }
 

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using IdentityModel;
 using IdentityServer4.Configuration;
@@ -194,26 +195,56 @@ namespace IdentityServer4.Validation
         {
             // filter JWT validation values
             var payload = new Dictionary<string, string>();
-            foreach (var key in token.Payload.Keys)
-            {
-                if (!Constants.Filters.JwtRequestClaimTypesFilter.Contains(key))
-                {
-                    var value = token.Payload[key];
 
-                    switch (value)
-                    {
-                        case string s:
-                            payload.Add(key, s);
-                            break;
-                        case JObject jobj:
-                            payload.Add(key, jobj.ToString(Formatting.None));
-                            break;
-                        case JArray jarr:
-                            payload.Add(key, jarr.ToString(Formatting.None));
-                            break;
-                    }
-                }
+
+
+            foreach (var key in Constants.Filters.JwtRequestClaimTypesFilter)
+            {
+                token.Payload.Remove(key);
             }
+
+            foreach (var claim in token.Claims.Where(c => !Constants.Filters.JwtRequestClaimTypesFilter.Contains(c.Type)))
+            {
+                var value = claim.Value;
+                if (payload.ContainsKey(claim.Type))
+                {
+                    if (payload[claim.Type].StartsWith("["))
+                    {
+                        continue;
+                    }
+                    value = $"[{string.Join(',', token.Claims.Where(c => c.Type == claim.Type).Select(c => $"\"{c.Value}\""))}]";
+                    payload[claim.Type] = value;
+                    continue;
+                }
+
+                payload.Add(claim.Type, value);
+            }
+            //foreach (var key in token.Payload.Keys)
+            //{
+            //    if (!Constants.Filters.JwtRequestClaimTypesFilter.Contains(key))
+            //    {
+            //        var value = token.Payload[key];
+
+            //        switch (value)
+            //        {
+            //            case string s:
+            //                payload.Add(key, s);
+            //                break;
+            //            case JObject jobj:
+            //                payload.Add(key, jobj.ToString(Formatting.None));
+            //                break;
+            //            case JArray jarr:
+            //                payload.Add(key, jarr.ToString(Formatting.None));
+            //                break;
+            //            case System.Text.Json.Nodes.JsonObject jsonElement:
+            //                payload.Add(key, jsonElement.ToJsonString());
+            //                break;
+            //            case System.Text.Json.Nodes.JsonArray jsonElement:
+            //                payload.Add(key, jsonElement.ToJsonString());
+            //                break;
+            //        }
+            //    }
+            //}
 
             return Task.FromResult(payload);
         }
