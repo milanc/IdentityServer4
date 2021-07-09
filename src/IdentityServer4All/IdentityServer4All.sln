@@ -13,12 +13,25 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer4", "..\IdentityServer4\src\IdentityServer4.csproj", "{5E996B4A-F29F-47BF-97ED-19F971E3899C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F2306BFA-2E4C-4650-85BE-FB5B7158A67F} = {F2306BFA-2E4C-4650-85BE-FB5B7158A67F}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer4.EntityFramework.Storage", "..\EntityFramework.Storage\src\IdentityServer4.EntityFramework.Storage.csproj", "{0789CF57-D607-4D1D-8247-F81867AC9033}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F2306BFA-2E4C-4650-85BE-FB5B7158A67F} = {F2306BFA-2E4C-4650-85BE-FB5B7158A67F}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer4.EntityFramework", "..\EntityFramework\src\IdentityServer4.EntityFramework.csproj", "{2269C4FA-DE73-4968-BF08-33EBB9B8A6C7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5E996B4A-F29F-47BF-97ED-19F971E3899C} = {5E996B4A-F29F-47BF-97ED-19F971E3899C}
+		{0789CF57-D607-4D1D-8247-F81867AC9033} = {0789CF57-D607-4D1D-8247-F81867AC9033}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer4.AspNetIdentity", "..\AspNetIdentity\src\IdentityServer4.AspNetIdentity.csproj", "{24BF2346-DFC6-4CFD-B14A-7BC311789EF5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5E996B4A-F29F-47BF-97ED-19F971E3899C} = {5E996B4A-F29F-47BF-97ED-19F971E3899C}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{F9AA5FB7-E931-4089-A9ED-F25DA5ECAF82}"
 EndProject
