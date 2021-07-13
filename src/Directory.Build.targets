@@ -1,13 +1,18 @@
 <Project>
 
   <PropertyGroup>
-    <FrameworkVersion>6.0.0-*</FrameworkVersion>
-    <ExtensionsVersion>6.0.0-*</ExtensionsVersion>
-    <EntityFrameworkVersion>6.0.0-*</EntityFrameworkVersion>
-    
-    <IdentityServerVersion>6.0.1-*</IdentityServerVersion>
+    <FrameworkVersion>6.0.*-*</FrameworkVersion>
+    <ExtensionsVersion>6.0.*-*</ExtensionsVersion>
+    <EntityFrameworkVersion>6.0.*-*</EntityFrameworkVersion>
+    <IdentityServerVersion>6.0.*-*</IdentityServerVersion>
+  </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <PackageOutputPath>../../../nuget</PackageOutputPath>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
@@ -39,15 +44,14 @@
     <PackageReference Update="Microsoft.Extensions.Logging" Version="$(ExtensionsVersion)" />
     <PackageReference Update="Microsoft.Extensions.Logging.Console" Version="$(ExtensionsVersion)" />
     <PackageReference Update="Microsoft.Extensions.Options.ConfigurationExtensions" Version="$(ExtensionsVersion)" />
-    
+
     <!--misc -->
     <PackageReference Update="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Update="Microsoft.IdentityModel.Protocols.OpenIdConnect" Version="6.11.1" />
     <PackageReference Update="System.IdentityModel.Tokens.Jwt" Version="6.11.1" />
-    <!--<PackageReference Update="System.IdentityModel.Tokens" Version="6.11.1" />-->
     <PackageReference Update="System.Security.Principal.Windows" Version="4.7.0" />
     <PackageReference Update="AutoMapper" Version="10.1.1" />
-    
+
     <!--microsoft asp.net core -->
     <PackageReference Update="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="$(FrameworkVersion)" />
     <PackageReference Update="Microsoft.AspNetCore.TestHost" Version="$(FrameworkVersion)" />
@@ -55,7 +59,7 @@
     <PackageReference Update="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="$(FrameworkVersion)" />
     <PackageReference Update="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="$(FrameworkVersion)" />
     <PackageReference Update="Microsoft.AspNetCore.Authentication.Certificate" Version="$(FrameworkVersion)"/>
-    
+
     <!--microsoft entity framework -->
     <PackageReference Update="Microsoft.EntityFrameworkCore.Relational" Version="$(EntityFrameworkVersion)" />
     <PackageReference Update="Microsoft.EntityFrameworkCore.Sqlite" Version="$(EntityFrameworkVersion)" />

@@ -22,7 +22,6 @@
     <PublicSign Condition="'$(OS)' != 'Windows_NT'">true</PublicSign>
 
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -41,7 +40,7 @@
     
   <ItemGroup>
     
-    <PackageReference Include="IdentityServer4" Version="6.0.1-alpha.0.10" />
+    <PackageReference Include="IdentityServer4" />
     
     <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
   </ItemGroup>
