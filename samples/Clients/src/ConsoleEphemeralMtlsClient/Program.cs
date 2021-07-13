@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Net;
 using System.Net.Http;
 using System.Security.Cryptography;
@@ -35,7 +35,7 @@ namespace ConsoleEphemeralMtlsClient
 
             var endpoint = disco
                 .TryGetValue(OidcConstants.Discovery.MtlsEndpointAliases)
-                .Value<string>(OidcConstants.Discovery.TokenEndpoint)
+                .GetProperty(OidcConstants.Discovery.TokenEndpoint)
                 .ToString();
             
             var response = await client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest

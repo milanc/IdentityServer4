@@ -1,4 +1,4 @@
-﻿using Clients;
+using Clients;
 using IdentityModel;
 using IdentityModel.Client;
 using Microsoft.AspNetCore.Authorization;
@@ -61,8 +61,8 @@ namespace MvcHybrid.Controllers
             if (String.IsNullOrWhiteSpace(eventsJson)) throw new Exception("Invalid logout token");
 
             var events = JObject.Parse(eventsJson);
-            var logoutEvent = events.TryGetValue("http://schemas.openid.net/event/backchannel-logout");
-            if (logoutEvent == null) throw new Exception("Invalid logout token");
+            JToken logoutEvent = null;
+            if (!events.TryGetValue("http://schemas.openid.net/event/backchannel-logout",out logoutEvent)) throw new Exception("Invalid logout token");
 
             return claims;
         }

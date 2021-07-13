@@ -1,4 +1,4 @@
-﻿using Clients;
+using Clients;
 using IdentityModel;
 using IdentityModel.Client;
 using Newtonsoft.Json.Linq;
@@ -32,7 +32,7 @@ namespace ConsoleMTLSClient
 
             var endpoint = disco
                     .TryGetValue(OidcConstants.Discovery.MtlsEndpointAliases)
-                    .Value<string>(OidcConstants.Discovery.TokenEndpoint)
+                    .GetProperty(OidcConstants.Discovery.TokenEndpoint)
                     .ToString();
             
             var response = await client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
