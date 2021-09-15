@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MvcClient.Models;
 using System.Diagnostics;
@@ -14,6 +15,7 @@ namespace MvcClient.Controllers
             _logger = logger;
         }
 
+        //[AllowAnonymous]
         public IActionResult Index()
         {
             return View();

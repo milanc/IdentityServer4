@@ -111,8 +111,8 @@ namespace IdentityServer.UnitTests.ResponseHandling.AuthorizeInteractionResponse
         {
             Func<Task> act = () => _subject.ProcessConsentAsync(null, new ConsentResponse());
 
-            act.Should().Throw<ArgumentNullException>()
-                .And.ParamName.Should().Be("request");
+            act.Should().ThrowAsync<ArgumentNullException>()
+                .Result.And.ParamName.Should().Be("request");
         }
         
         [Fact]
@@ -146,7 +146,7 @@ namespace IdentityServer.UnitTests.ResponseHandling.AuthorizeInteractionResponse
 
             Func<Task> act = () => _subject.ProcessConsentAsync(request);
 
-            act.Should().Throw<ArgumentException>()
+            act.Should().ThrowAsync<ArgumentException>().Result
                 .And.Message.Should().Contain("PromptMode");
         }
 
@@ -166,7 +166,7 @@ namespace IdentityServer.UnitTests.ResponseHandling.AuthorizeInteractionResponse
 
             Func<Task> act = () => _subject.ProcessConsentAsync(request);
 
-            act.Should().Throw<ArgumentException>()
+            act.Should().ThrowAsync<ArgumentException>().Result
                 .And.Message.Should().Contain("PromptMode");
         }
 

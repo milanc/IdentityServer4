@@ -1,4 +1,4 @@
-﻿@using Microsoft.AspNetCore.Authentication
+@using Microsoft.AspNetCore.Authentication
 
 <h2>Claims</h2>
 
@@ -13,9 +13,9 @@
 <h2>Properties</h2>
 
 <dl>
-    @foreach (var prop in (await Context.AuthenticateAsync()).Properties.Items)
+    @*@foreach (var prop in (await Context.AuthenticateAsync()).Properties.Items)
     {
         <dt>@prop.Key</dt>
         <dd>@prop.Value</dd>
-    }
+    }*@
 </dl>

@@ -10,7 +10,7 @@ namespace MvcClient
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
             JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
 
@@ -18,17 +18,23 @@ namespace MvcClient
             {
                 options.DefaultScheme = "Cookies";
                 options.DefaultChallengeScheme = "oidc";
+
             })
             .AddCookie("Cookies")
             .AddOpenIdConnect("oidc", options =>
             {
                 options.Authority = "https://localhost:5001";
-
                 options.ClientId = "mvc";
                 options.ClientSecret = "secret";
                 options.ResponseType = "code";
-
+                
                 options.SaveTokens = true;
+
+                options.Events.OnRedirectToIdentityProvider = (x) =>
+                {
+                    x.ProtocolMessage.RedirectUri = "com.app.domain://";
+                    return Task.CompletedTask;
+                };
             });
         }
 
